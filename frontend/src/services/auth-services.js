@@ -37,6 +37,11 @@ class AuthService {
             username: data.username,
             email: data.email,
             password: data.password
+        }).then(resp => {
+            if (resp.status === 201) {
+                window.location.href = "/login"
+            }
+
         });
     }
 

@@ -72,5 +72,4 @@ public class PostController {
     public ResponseEntity<?> getImage(@PathVariable UUID uuid) throws IOException{
         return postService.getImage(uuid);
     }
-
 }

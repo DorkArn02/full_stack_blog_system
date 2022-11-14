@@ -65,7 +65,7 @@ class PostService {
         if (authServices.isTokenExpired()) {
             window.location.href = "/"
         } else {
-            return axios.delete(API_URL + id, { headers: authHeader() });
+            return axios.delete(API_URL + id, { headers: authHeader() }).then(() => window.location.reload());
         }
     }
     /**
@@ -77,7 +77,7 @@ class PostService {
         if (authServices.isTokenExpired()) {
             window.location.href = "/"
         } else {
-            return axios.put(API_URL + id, data, { headers: authHeader() });
+            return axios.put(API_URL + id, data, { headers: authHeader() }).then(() => window.location.reload());
         }
     }
 }

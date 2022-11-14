@@ -13,11 +13,11 @@ export const Navbar = () => {
     useEffect(() => {
         setUser(authServices.getCurrentUser())
 
-        if (authServices.isTokenExpired()) {
-            authServices.logout()
-            navigate('/')
-            window.location.reload()
-        }
+        /* if (authServices.isTokenExpired()) {
+             authServices.logout()
+             navigate('/')
+             window.location.reload()
+         }*/
     }, [])
 
     const handleSearch = (e) => {
