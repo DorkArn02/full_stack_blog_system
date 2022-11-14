@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<categories>
+    <category>
+        <name>General</name>
+    </category>
+    <category>
+        <name>Science</name>
+    </category>
+    <category>
+        <name>Technology</name>
+    </category>
+    <category>
+        <name>World</name>
+    </category>
+    <category>
+        <name>Politics</name>
+    </category>
+    <category>
+        <name>Other</name>
+    </category>
+</categories>
