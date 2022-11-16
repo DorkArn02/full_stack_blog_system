@@ -2,26 +2,26 @@ import axios from 'axios';
 import authHeader from './auth-header';
 import authServices from './auth-services';
 
-const API_URL = '/api/comments/';
+const API_URL = '/api/posts/comments/';
 
 class CommentService {
     getCommentById(id) {
         return axios.get(API_URL + id);
     }
 
-    addNewComment(postId, data) {
+    async addNewComment(postId, data) {
         if (authServices.isTokenExpired()) {
             window.location.href("/")
         } else {
-            return axios.post(API_URL + postId, data, { headers: authHeader() });
+            return await axios.post(API_URL + postId, { content: data }, { headers: authHeader() }).then(() => window.location.reload());
         }
     }
 
-    deleteCommentById(postId) {
+    async deleteCommentById(postId) {
         if (authServices.isTokenExpired()) {
             window.location.href("/")
         } else {
-            return axios.delete(API_URL + postId, { headers: authHeader() });
+            return await axios.delete(API_URL + postId, { headers: authHeader() }).then(() => window.location.reload());
         }
     }
 

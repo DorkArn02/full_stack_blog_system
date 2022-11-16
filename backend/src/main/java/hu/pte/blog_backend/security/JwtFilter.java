@@ -2,6 +2,9 @@ package hu.pte.blog_backend.security;
 
 import hu.pte.blog_backend.services.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,12 +40,23 @@ public class JwtFilter extends OncePerRequestFilter {
         if (!request.getRequestURI().contains("auth")) {
             if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
                 token = tokenHeader.substring(7);
+                String msg = "";
                 try {
                     username = jwtUtil.getUsernameFromToken(token);
-                } catch (IllegalArgumentException e) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                } catch (ExpiredJwtException e) {
+                } catch (SignatureException e) {
+                    msg = "Invalid JWT signature";
+                } catch (MalformedJwtException e) {
+                    msg = "Invalid JWT token";
+                }catch (ExpiredJwtException e){
+                    msg = "Expired JWT token";
+                }catch (UnsupportedJwtException e){
+                    msg = "Unsupported JWT token";
+                }catch (IllegalArgumentException e){
+                    msg = "JWT claims string is empty";
+                }
+                if(!msg.isEmpty()){
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
                 }
             }
             if (null != username && SecurityContextHolder.getContext().getAuthentication() == null) {

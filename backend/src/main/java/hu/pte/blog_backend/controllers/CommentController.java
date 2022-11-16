@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/posts/comments/")
-@CrossOrigin(origins = {"http://localhost:3000"})
 public class CommentController {
     private final CommentService commentService;
 

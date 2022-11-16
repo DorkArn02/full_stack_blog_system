@@ -16,10 +16,12 @@ public class UserResponseDTO {
     private UUID user_id;
     private String email;
     private Set<Role> roles;
+    private String username;
 
     public UserResponseDTO(User user){
         this.user_id = user.getUser_id();
         this.email = user.getEmail();
         this.roles = user.getRoles();
+        this.username = user.getUsername();
     }
 }

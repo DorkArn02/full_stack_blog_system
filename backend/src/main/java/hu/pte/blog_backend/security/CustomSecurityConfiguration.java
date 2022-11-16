@@ -59,7 +59,7 @@ public class CustomSecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/api/posts/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/posts/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/posts/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/users/**").hasAnyRole("USER", "ADMIN") // TODO
+                .antMatchers(HttpMethod.GET, "/api/users/**").permitAll() // TODO
                 .antMatchers(HttpMethod.POST, "/api/users/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/users/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("USER", "ADMIN")
@@ -76,13 +76,17 @@ public class CustomSecurityConfiguration {
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
         config.setExposedHeaders(List.of("Authorization"));
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http)

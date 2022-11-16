@@ -61,11 +61,11 @@ class PostService {
      * Delete a specified post by id
      * @param {UUID} id 
      */
-    deletePostById(id) {
+    async deletePostById(id) {
         if (authServices.isTokenExpired()) {
             window.location.href = "/"
         } else {
-            return axios.delete(API_URL + id, { headers: authHeader() }).then(() => window.location.reload());
+            return await axios.delete(API_URL + id, { headers: authHeader() }).then(() => window.location.reload());
         }
     }
     /**
@@ -77,7 +77,7 @@ class PostService {
         if (authServices.isTokenExpired()) {
             window.location.href = "/"
         } else {
-            return axios.put(API_URL + id, data, { headers: authHeader() }).then(() => window.location.reload());
+            return axios.put(API_URL + id, data, { headers: authHeader() });
         }
     }
 }

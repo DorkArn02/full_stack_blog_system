@@ -40,7 +40,7 @@ public class CommentService {
     public CommentResponseDTO getCommentById(UUID id){
         if(commentRepository.findById(id).isPresent()){
             Comment comment = commentRepository.findById(id).get();
-            return new CommentResponseDTO(comment, userRepository.findById(comment.getUser_id().getUser_id()).get().getUsername());
+            return new CommentResponseDTO(comment, userRepository.findById(comment.getUser_id().getUser_id()).get().getUser_id());
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

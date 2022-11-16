@@ -30,6 +30,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem("user");
+        window.location.href = "/"
     }
 
     register(data) {

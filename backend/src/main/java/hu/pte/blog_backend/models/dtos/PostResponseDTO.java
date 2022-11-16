@@ -24,6 +24,7 @@ public class PostResponseDTO {
     private String author;
     private List<CommentResponseDTO> comments;
 
+
     public PostResponseDTO(Post post, String author){
         this.post_id = post.getPost_id();
         this.user_id = post.getUser_id().getUser_id();
@@ -36,7 +37,7 @@ public class PostResponseDTO {
         List<CommentResponseDTO> commentDTOS = new ArrayList<>();
 
         post.getComments().forEach(comment -> {
-             commentDTOS.add(new CommentResponseDTO(comment, author));
+             commentDTOS.add(new CommentResponseDTO(comment, post.getUser_id().getUser_id()));
         });
 
         this.comments = commentDTOS;

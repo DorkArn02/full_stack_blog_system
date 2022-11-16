@@ -18,9 +18,9 @@ public class CommentResponseDTO {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String author;
+    private UUID author;
 
-    public CommentResponseDTO(Comment comment, String author) {
+    public CommentResponseDTO(Comment comment, UUID author) {
         this.comment_id = comment.getComment_id();
         this.user_id = comment.getUser_id().getUser_id();
         this.post_id = comment.getPost_id().getPost_id();

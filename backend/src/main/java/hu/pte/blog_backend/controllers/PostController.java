@@ -16,7 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/posts")
-@CrossOrigin(origins = {"http://localhost:3000"})
 public class PostController {
     private final PostService postService;
 

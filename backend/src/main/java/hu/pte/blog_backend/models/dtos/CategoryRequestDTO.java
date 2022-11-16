@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CategoryRequestDTO {
-    private Integer id;
     private String name;
 
     public CategoryRequestDTO(Category category){
